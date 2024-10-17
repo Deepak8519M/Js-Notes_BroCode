@@ -1,0 +1,827 @@
+<!-- Difference Between Number() and parseInt() ?
+
+The difference between `Int` (or `Number` in JavaScript) and `parseInt()` lies in **how they convert a value into a number** and what types of values they can handle. Let me explain both in detail:
+
+### 1. **`Number()`** (or `Int` concept):
+
+- The `Number()` function in JavaScript converts a value into a number, regardless of whether it's a string, boolean, or other types.
+
+- **Usage**: It tries to convert the entire string to a number and can handle decimal points, but it will return `NaN` (Not-a-Number) if the value can't be fully converted.
+
+        Examples:
+
+            Number("123"); // 123 (string to number)
+            Number("123.45"); // 123.45 (string to floating-point number)
+            Number("abc"); // NaN (can't convert 'abc' to a number)
+            Number(true); // 1 (true is treated as 1)
+            Number(false); // 0 (false is treated as 0)
+            Number(null); // 0 (null is treated as 0)
+
+
+- **Key Point**: `Number()` converts the **entire string** to a number. If the string contains anything non-numeric (besides spaces), it will return `NaN`.
+
+---------------------------------------------------------------------------------------------------------------------
+
+### 2. **`parseInt()`**:
+
+- The `parseInt()` function parses a string and returns an integer based on the **radix** (number base, e.g., 10 for decimal). If a string starts with non-numeric characters, it stops parsing at that point.
+
+- **Usage**: It stops reading the string as soon as it encounters any non-numeric character. It also **ignores decimals** and only returns an integer.
+
+    Examples:
+
+            parseInt("123"); // 123 (string to integer)
+            parseInt("123.45"); // 123 (only takes the integer part)
+            parseInt("abc123"); // NaN (starts with non-numeric character)
+            parseInt("123abc"); // 123 (stops parsing when it reaches 'abc')
+            parseInt("   123"); // 123 (ignores leading spaces)
+
+
+- **Key Point**: `parseInt()` only parses the **integer part** of a string. It reads from left to right, stopping as soon as it hits a non-numeric character.
+
+  ### Key Differences:
+
+       1. **Return Type**:
+       - `Number()` can return integers, floating-point numbers, or `NaN`.
+       - `parseInt()` always returns an integer.
+
+       2. **Handling Non-Numeric Characters**:
+       - `Number()` will return `NaN` if the entire string cannot be converted.
+       - `parseInt()` will return as much of the number as it can before encountering non-numeric characters (or return `NaN` if no numeric part is found).
+
+       3. **Handling Decimals**:
+       - `Number()` can handle decimals and return floating-point numbers.
+       - `parseInt()` completely ignores anything after a decimal point.
+
+       4. **Radix Support**:
+       - `Number()` always assumes base 10.
+       - `parseInt()` allows you to specify the **radix** (base), so you can convert from binary, octal, hexadecimal, etc.
+
+### Summary:
+
+    - **Use `Number()`** when you want to convert a string to a number (integer or float) and need to handle the entire string.
+
+    - **Use `parseInt()`** when you want to extract an integer from a string, or if you're dealing with numbers in different bases (binary, octal, etc.). -->
+
+<!-- ------------------------------------------------------------------------------------------------------------ -->
+
+<!-- What is Radix?
+
+The radix is the base of the number system you are working with. The most common number system we use is decimal (base 10), which uses digits 0-9. Other number systems include binary (base 2) and hexadecimal (base 16).
+
+Why Pass 10 to parseInt()?
+When converting strings into numbers using parseInt(), it's always a good practice to specify the radix to avoid unexpected results. If you don't specify the radix, JavaScript will sometimes try to guess the number system, which can lead to mistakes.
+
+Example:
+
+    If you input a number starting with 0, JavaScript might interpret it as an octal (base 8) number unless you explicitly tell it to treat the number as decimal.
+
+    parseInt("10", 10); // This will return 10 (base 10)
+    parseInt("10", 2);  // This will return 2 (base 2 - binary interpretation of "10")
+    parseInt("10", 8);  // This will return 8 (base 8 - octal interpretation of "10")
+    parseInt("10", 16); // This will return 16 (base 16 - hexadecimal interpretation of "10")
+
+
+    Without the radix, there could be edge cases where numbers starting with 0 or other special formats might not behave as expected.
+
+    -->
+
+<!-- ------------------------------------------------------------------------------------------------------------ -->
+
+<!--
+What is isNan() ?
+
+`isNaN()` is a built-in JavaScript function that checks whether a value is **Not-a-Number (NaN)**. It returns `true` if the value is **NaN** and `false` if the value is a valid number.
+
+### What is `NaN`?
+`NaN` stands for "Not-a-Number" and is a special value in JavaScript that represents an invalid number or a result that is not a valid number (for example, dividing by zero or trying to convert non-numeric strings into numbers).
+
+### Purpose of `isNaN()`
+`isNaN()` is used to determine if a value is NaN or not. Since `NaN` itself is a tricky concept (it is not equal to anything, including itself), this function helps you check when a value is invalid or non-numeric.
+
+### Example:
+```javascript
+console.log(isNaN(123));      // false (because 123 is a valid number)
+console.log(isNaN("123"));    // false (because "123" can be converted to a valid number)
+console.log(isNaN("abc"));    // true  (because "abc" cannot be converted to a number)
+console.log(isNaN(NaN));      // true  (because NaN is Not-a-Number)
+console.log(isNaN(undefined));// true  (because undefined is not a number)
+```
+
+### When `isNaN()` Returns `true`:
+- If the value **cannot be converted to a valid number**. Examples include strings like `"abc"`, `undefined`, or `NaN` itself.
+
+### When `isNaN()` Returns `false`:
+- If the value **is a valid number** or **can be converted to a number**. Even if the value is a string that contains a number (like `"123"`), it will be converted and `isNaN()` will return `false`.
+
+### Why Use `isNaN()`?
+- You use `isNaN()` to verify if an operation resulted in a number or not, which helps prevent errors in calculations or logic when a value unexpectedly isn't a number.
+
+#### Example Use Case:
+```javascript
+let value = "Hello";
+if (isNaN(value)) {
+  console.log("This is not a valid number");
+} else {
+  console.log("This is a valid number");
+}
+```
+
+In this case, since `"Hello"` is not a valid number, `isNaN()` will return `true`, and you can act accordingly (e.g., show an error message).
+
+### Important Note:
+`isNaN()` can sometimes give unexpected results with certain non-number values, so a more reliable way to check for numbers is using `Number.isNaN()`, which only returns `true` if the value is exactly `NaN`.
+
+#### `Number.isNaN()` Example:
+```javascript
+console.log(Number.isNaN(NaN));           // true
+console.log(Number.isNaN("abc"));         // false (because "abc" is not converted to NaN)
+console.log(Number.isNaN(undefined));     // false
+```
+
+Use `Number.isNaN()` if you want to be stricter with checking actual NaN values. -->
+
+<!-- ---------------------------------------------------------------------------------------------------------------------
+
+More Understanding about usage of isNan & Number.isNan() :
+
+Let’s break down the difference between `isNaN()` and `Number.isNaN()` in a simpler way.
+
+### 1. **`isNaN()`** (Global Function)
+
+- `isNaN()` is a **loose check** that tries to convert the input to a number first, and **then** checks if it’s `NaN` (Not-a-Number).
+
+- This can sometimes give **unexpected results** because it tries to convert things like strings and other types to numbers before making its decision.
+
+#### Examples:
+```javascript
+isNaN("abc"); // true - "abc" cannot be converted to a number, so it's Not-a-Number
+isNaN("123"); // false - "123" can be converted to the number 123
+isNaN(true);  // false - true is converted to 1, which is a number
+isNaN(undefined); // true - undefined becomes NaN, so it's considered Not-a-Number
+```
+
+- **Important**: It tries to **force** the value into a number first. So sometimes things that don’t seem like numbers (like `"123"`, `true`, etc.) return `false` because they can be converted.
+
+### 2. **`Number.isNaN()`** (Stricter Check)
+- `Number.isNaN()` is **stricter** and only returns `true` if the value **is exactly** `NaN`. It does **not** try to convert the input to a number.
+- This means it only checks if the value is **already** `NaN`, and does not try to convert strings or other values first.
+
+#### Examples:
+```javascript
+Number.isNaN(NaN);         // true - because NaN is exactly NaN
+Number.isNaN("abc");       // false - "abc" is not NaN, it's just a string
+Number.isNaN("123");       // false - "123" is a string, not NaN
+Number.isNaN(undefined);   // false - undefined is not NaN
+```
+
+### Why Use `Number.isNaN()`?
+- **Accuracy**: It only returns `true` for actual `NaN` values.
+- **No Conversion**: It doesn’t try to convert anything; it just checks if a value is `NaN` or not.
+
+### Key Difference:
+- **`isNaN()`**: Converts the value to a number and then checks if it’s `NaN`.
+- **`Number.isNaN()`**: Only checks if the value is already `NaN` without trying to convert it.
+
+#### Example to Compare:
+```javascript
+isNaN("abc");            // true - "abc" can't be converted to a number, so it's NaN after conversion
+Number.isNaN("abc");     // false - "abc" is not NaN, it's just a string, no conversion
+```
+
+In summary, `isNaN()` is useful when you want to check if something **can be converted to a number** and ends up being `NaN`, but `Number.isNaN()` is more precise for checking **only real `NaN` values** without trying to convert things first. -->
+
+<!--
+
+---------------------------------------------------------------------------------------------------------------------
+class Vehicle {
+  constructor(brand, model, year) {
+    this.brand = brand;
+    this.model = model;
+    this.year = year;
+  }
+
+  start() {
+    console.log(`${this.brand} ${this.model} is starting.`);
+  }
+}
+
+class Car extends Vehicle {
+  constructor(brand, model, year, color) {
+    super(brand, model, year);  // Calls the Vehicle constructor
+    this.color = color;         // Adds color property specific to Car
+  }
+
+  honk() {
+    console.log(`${this.brand} ${this.model} is honking.`);
+  }
+}
+
+const car3 = new Car("Dodge", "Charger", 2020, "silver");
+car3.start();  // From Vehicle class
+car3.honk();   // From Car class
+---------------------------------------------------------------------------------------------------------------------
+
+Objects in the Case of Inheritance:
+
+In JavaScript, objects are the fundamental building blocks, and classes (introduced in ES6) are essentially syntactic sugar over constructor functions and prototype-based inheritance. When using inheritance, objects created from a derived class (like Car) have access to properties and methods from both the child class (Car) and the parent class (Vehicle).
+
+How Objects Work in Inheritance
+When you create an instance of a class that extends another class (like Car extending Vehicle), here’s what happens:
+
+Child Class Object Creation:
+
+An object (e.g., car3) is created from the Car class.
+JavaScript links this object to the Car.prototype, and through prototype inheritance, it’s also linked to Vehicle.prototype.
+Property Initialization:
+
+The Car constructor is invoked, and before it can set properties specific to Car, it calls the parent’s (Vehicle) constructor using super().
+The parent’s constructor (Vehicle) initializes the shared properties (brand, model, year), and the child’s constructor (Car) initializes any additional properties, such as color.
+Prototype Chain:
+
+When you try to access a method (e.g., car3.start()), JavaScript first checks if the method exists on the object itself. If not, it follows the prototype chain: it looks in Car.prototype, and if not found there, it looks in Vehicle.prototype.
+Methods are shared through the prototype chain, not duplicated for each object. -->
+
+<!--
+You're right to point out the seeming contradiction, so let's clarify how **methods and objects** work in JavaScript.
+
+### Clarification on Object Methods and Prototypes
+
+1. **Objects and Methods**:
+   - **Objects in JavaScript can** have their own methods directly attached to them. For example:
+     ```javascript
+     const car = {
+       brand: "Dodge",
+       model: "Charger",
+       start: function() {
+         console.log(`${this.brand} ${this.model} is starting.`);
+       }
+     };
+     car.start();  // Output: "Dodge Charger is starting."
+     ```
+   - Here, `car` has a method `start()` directly attached to it. This is a method **defined on the object itself**.
+
+2. **Inheritance and Prototypes**:
+   - When you use **classes** (or inheritance), the child object **doesn't directly have methods attached to it**. Instead, those methods are defined on the **prototype** of the class.
+   - JavaScript checks **if a method exists on the object itself first**, and if it doesn't find it, it looks up the prototype chain (where methods from parent classes are found).
+
+### What I Meant in Each Case:
+
+- When I said **"JavaScript checks if the method exists on the object itself"**, I meant:
+  - JavaScript **first** checks whether a method is directly attached to the object.
+  - If the method isn’t there, JavaScript looks up the **prototype chain** (where class methods are stored).
+
+### Detailed Breakdown with Classes and Prototypes
+
+```javascript
+class Vehicle {
+  constructor(brand, model, year) {
+    this.brand = brand;  // Direct property on the object
+    this.model = model;
+    this.year = year;
+  }
+
+  start() {  // Method defined on Vehicle.prototype
+    console.log(`${this.brand} ${this.model} is starting.`);
+  }
+}
+
+const car = new Vehicle("Dodge", "Charger", 2020);
+
+// This is how car looks internally:
+console.log(car);
+// Output: { brand: "Dodge", model: "Charger", year: 2020 }
+
+// Calling the method:
+car.start();  // "Dodge Charger is starting."
+```
+
+- **Properties** (`brand`, `model`, `year`) are **directly attached to `car`**.
+- **Methods** like `start()` are **not** directly attached to `car`; they are defined on the `Vehicle.prototype` (the parent class’s prototype).
+- When `car.start()` is called, JavaScript checks:
+  1. If `start()` exists directly on `car` itself (it doesn't).
+  2. It then looks in `Vehicle.prototype` (where `start()` is found).
+
+Thus, while **JavaScript checks the object first**, in the case of inheritance, the method is actually located on the **prototype**, not directly on the object.
+
+### Key Difference:
+
+- **Object-Literal Methods**: Methods can be **directly attached** to an object (as in the example with `const car = {}`).
+- **Class-based Methods (Inheritance)**: Methods are typically **not directly on the object**; they live in the prototype chain (on `Class.prototype`).
+
+### Summary:
+
+- In object literals, methods can exist directly on the object.
+- In class-based inheritance, methods are **not on the object itself** but exist on the object's **prototype** (through inheritance).
+- When you call a method, JavaScript first checks the object itself for the method and, if it doesn’t find it, looks up the **prototype chain**.
+
+Let me know if this clears things up, or if you have more questions about this concept! -->
+
+<------------------------------------------------------------------------------------------------------------------->
+What happens when we create obj from an class?
+
+When you create an object from a class in JavaScript, the **constructor** will run to initialize properties directly on the object, but **methods are not created directly on the object**. Instead, they are part of the class’s **prototype**.
+
+### What Happens When You Create an Object from a Class?
+
+1. **Properties** defined in the constructor are **created directly on the object**.
+2. **Methods** defined in the class are **not copied to the object**. Instead, they are stored on the class’s **prototype**, and the object accesses them through **prototype inheritance**.
+
+Let’s break this down with an example.
+
+### Example:
+
+```javascript
+class Vehicle {
+  constructor(brand, model, year) {
+    this.brand = brand; // Directly attached to the object
+    this.model = model;
+    this.year = year;
+  }
+
+  start() {
+    console.log(`${this.brand} ${this.model} is starting.`);
+  }
+}
+
+const car = new Vehicle("Dodge", "Charger", 2020);
+```
+
+### What Happens When `car` is Created:
+
+1. **Constructor Execution**:
+
+   - The `constructor(brand, model, year)` is called when you do `new Vehicle("Dodge", "Charger", 2020)`.
+   - The properties `brand`, `model`, and `year` are **directly assigned** to the `car` object.
+
+2. **Methods**:
+   - The method `start()` is **not directly created on `car`**. It lives on `Vehicle.prototype`, and `car` can access it via the prototype chain.
+
+### Inspecting the Object:
+
+If you inspect the `car` object using `console.log(car)`, you’ll see something like this:
+
+```javascript
+{
+  brand: "Dodge",
+  model: "Charger",
+  year: 2020
+}
+```
+
+Notice that `start()` is **not listed** in the object itself. This is because `start()` lives on the prototype.
+
+However, you can still call `car.start()` because JavaScript will look for it in `Vehicle.prototype`.
+
+### Prototype Chain:
+
+The actual relationship looks like this:
+
+```
+car ---> Vehicle.prototype ---> Object.prototype ---> null
+```
+
+- `car` has its own properties (`brand`, `model`, `year`).
+- `car`'s prototype is `Vehicle.prototype`, which contains the `start()` method.
+- `Vehicle.prototype`'s prototype is `Object.prototype`.
+
+### Checking Where the Method Exists:
+
+To check if a method exists directly on the object, you can use `hasOwnProperty()`:
+
+```javascript
+console.log(car.hasOwnProperty("start")); // false
+console.log(Vehicle.prototype.hasOwnProperty("start")); // true
+```
+
+This shows that `start()` belongs to `Vehicle.prototype`, not to `car` itself.
+
+### In Summary:
+
+- **Properties** from the constructor are directly attached to the object.
+- **Methods** from the class are not copied into each object; instead, they are stored on the class's prototype.
+- When you create an object from a class, the object has access to methods via the **prototype chain**, but the methods themselves are not part of the object’s direct structure.
+
+<------------------------------------------------------------------------------------------------------------------->
+
+<!-- When you run the line:
+
+```javascript
+const car = new Vehicle("Dodge", "Charger", 2020);
+```
+
+several things happen behind the scenes to create the `car` object from the `Vehicle` class. Let’s break it down step by step to understand exactly what happens in detail.
+
+### Step 1: **`new Vehicle()` Creates an Empty Object**
+- When you use the `new` keyword, JavaScript creates a **new empty object** and links it to the prototype of the class (in this case, `Vehicle.prototype`).
+  
+In memory, an empty object is created like this:
+
+```javascript
+car = {};  // A new object is created
+```
+
+### Step 2: **Set `car.__proto__` to `Vehicle.prototype`**
+- The new empty object `car` is linked to the `Vehicle.prototype`. This means that `car` can access any methods or properties defined on the `Vehicle` prototype.
+
+This linking looks like this:
+
+```javascript
+car.__proto__ = Vehicle.prototype;
+```
+
+So, if you call any method on `car` (like `car.start()`), JavaScript will look for the `start()` method on `Vehicle.prototype`.
+
+### Step 3: **`Vehicle` Constructor is Called**
+- After setting up the prototype link, JavaScript calls the `Vehicle` class’s constructor function to initialize the properties of the new `car` object.
+  
+The constructor is called with the arguments you passed:
+
+```javascript
+Vehicle.call(car, "Dodge", "Charger", 2020);
+```
+
+- This internally means that the `Vehicle` constructor is executed and the properties (`brand`, `model`, `year`) are assigned to the `car` object.
+
+Here's the constructor of `Vehicle`:
+
+```javascript
+class Vehicle {
+  constructor(brand, model, year) {
+    this.brand = brand;
+    this.model = model;
+    this.year = year;
+  }
+
+  start() {
+    console.log(`${this.brand} ${this.model} is starting.`);
+  }
+}
+```
+
+### Step 4: **Constructor Adds Properties to `car`**
+- The `Vehicle` constructor assigns properties (`brand`, `model`, `year`) to the `car` object. The `this` keyword inside the constructor refers to the new `car` object, so properties are assigned to `car` like this:
+
+```javascript
+this.brand = "Dodge";
+this.model = "Charger";
+this.year = 2020;
+```
+
+After this step, the object looks like:
+
+```javascript
+car = {
+  brand: "Dodge",
+  model: "Charger",
+  year: 2020
+};
+```
+
+Now, the `car` object has the properties `brand`, `model`, and `year` attached directly to it.
+
+### Step 5: **Prototype Chain Setup**
+- Even though `car` now has its own properties (`brand`, `model`, `year`), it doesn’t have methods like `start()` attached directly to it. Instead, these methods exist on the `Vehicle.prototype`.
+
+The prototype chain looks like this:
+
+```
+car --> Vehicle.prototype --> Object.prototype --> null
+
+````
+
+- When you call `car.start()`, JavaScript checks:
+  1. **Is `start()` a method on `car` itself?** No, it’s not.
+  2. **Is `start()` a method on `Vehicle.prototype`?** Yes, it is, so the method is called from the prototype.
+
+### Summary of What Happens:
+
+1. **An empty object** (`car`) is created.
+2. **The prototype of the object** is set to `Vehicle.prototype`, linking it to the `Vehicle` class.
+3. The **constructor of `Vehicle` is called**, passing the arguments `"Dodge"`, `"Charger"`, and `2020`.
+4. **Properties** (`brand`, `model`, `year`) are initialized on the `car` object.
+5. **Methods** like `start()` are not directly on `car`, but JavaScript will find them on `Vehicle.prototype` when needed due to **prototype inheritance**.
+
+### Visual Representation of `car` Object:
+
+- The `car` object itself:
+
+```json
+{
+  "brand": "Dodge",
+  "model": "Charger",
+  "year": 2020
+}
+````
+
+- The prototype chain:
+
+```javascript
+car.__proto__ === Vehicle.prototype; // true
+Vehicle.prototype.__proto__ === Object.prototype; // true
+```
+
+So when you call:
+
+```javascript
+car.start(); // Calls the method from Vehicle.prototype
+```
+
+JavaScript finds the `start()` method in `Vehicle.prototype`, and it uses `car`'s properties (`brand`, `model`, `year`) to produce the output `"Dodge Charger is starting."`
+
+Let me know if you'd like more details on any specific part of this process! -->
+
+<------------------------------------------------------------------------------------------------------------------->
+
+<!--
+The code you’ve provided:
+
+```javascript
+constructor(brand, model, year) {
+  this.brand = brand;
+  this.model = model;
+  this.year = year;
+}
+```
+
+is not a class by itself. Instead, this is the **constructor method** within a class. It is used to initialize the properties of an object when a new instance of the class is created. Let’s break this down:
+
+### What is a Constructor?
+
+A **constructor** is a special method in a class that is automatically called when a new object is created using the `new` keyword. Its job is to set up the initial values of the object’s properties.
+
+In JavaScript, when you create a class, the `constructor` method is where you define how the object is initialized.
+
+### Example of a Class with a Constructor:
+
+```javascript
+class Vehicle {
+  // The constructor method
+  constructor(brand, model, year) {
+    this.brand = brand;  // 'this' refers to the object being created
+    this.model = model;
+    this.year = year;
+  }
+
+  // A method in the class
+  start() {
+    console.log(`${this.brand} ${this.model} is starting.`);
+  }
+}
+```
+
+- **`constructor(brand, model, year)`**: This is the **constructor function** that runs automatically when an object is created from the `Vehicle` class. It takes parameters (`brand`, `model`, `year`) and assigns them to the object’s properties using `this`.
+
+- **`this.brand = brand`**: The `this` keyword refers to the current object being created. It assigns the value of `brand` passed to the constructor to the `brand` property of the object.
+
+### How the Constructor Works:
+
+When you create a new object from this class:
+
+```javascript
+const car = new Vehicle("Dodge", "Charger", 2020);
+```
+
+1. The `new Vehicle()` calls the **constructor** method.
+2. The `constructor` receives the arguments `"Dodge"`, `"Charger"`, and `2020`.
+3. The `this` keyword inside the constructor refers to the newly created object (`car`), and the properties (`brand`, `model`, `year`) are assigned to that object.
+4. The `car` object now has the properties `brand`, `model`, and `year` with the values `"Dodge"`, `"Charger"`, and `2020`.
+
+### Full Example with Class and Constructor:
+
+```javascript
+class Vehicle {
+  constructor(brand, model, year) {  // Constructor method
+    this.brand = brand;              // 'this' refers to the object being created
+    this.model = model;
+    this.year = year;
+  }
+
+  start() {  // Another method in the class
+    console.log(`${this.brand} ${this.model} is starting.`);
+  }
+}
+
+const car = new Vehicle("Dodge", "Charger", 2020);
+car.start();  // Output: "Dodge Charger is starting."
+```
+
+### Key Points:
+- **Constructor**: A special method that sets up the object when it is created using `new`. It’s used to assign initial values to object properties.
+- **`this` keyword**: Refers to the new object being created. It ensures the properties belong to the specific object.
+- The `constructor` is a **method within a class**, not the class itself. The class is defined by the `class` keyword, and the constructor is part of the class definition.
+
+Let me know if you'd like to explore constructors or classes further! -->
+
+<------------------------------------------------------------------------------------------------------------------->
+
+<!--
+The expressions you provided involve the concept of the **prototype chain** in JavaScript. Let’s break down each expression to understand what they mean and how the prototype chain works.
+
+### Understanding Prototypes
+
+In JavaScript, every object has a **prototype**, which is another object from which it can inherit properties and methods. This is part of the prototype-based inheritance system in JavaScript.
+
+1. **`car.__proto__`**: This is a reference to the prototype of the `car` object.
+2. **`Vehicle.prototype`**: This is the prototype object associated with the `Vehicle` class, where methods defined in the `Vehicle` class (like `start()`) reside.
+3. **`Object.prototype`**: This is the top-level prototype in JavaScript. All objects in JavaScript inherit from `Object.prototype` unless explicitly created to inherit from a different prototype.
+
+### Expression Breakdown
+
+1. **Expression 1: `car.__proto__ === Vehicle.prototype;`**
+
+   - This checks whether the prototype of the `car` object is the same as the `Vehicle.prototype`.
+   - When you create a new object with `new Vehicle(...)`, JavaScript sets the `__proto__` property of the `car` object to `Vehicle.prototype`.
+   - Therefore, this expression evaluates to `true` because `car` inherits from `Vehicle.prototype`.
+
+   ```javascript
+   console.log(car.__proto__ === Vehicle.prototype); // Output: true
+   ```
+
+2. **Expression 2: `Vehicle.prototype.__proto__ === Object.prototype;`**
+
+   - This checks whether the prototype of `Vehicle.prototype` is the same as `Object.prototype`.
+   - In JavaScript, the default prototype of any function (including classes) is `Function.prototype`, and the prototype of `Function.prototype` is `Object.prototype`.
+   - Therefore, `Vehicle.prototype` inherits from `Object.prototype`, making this expression also evaluate to `true`.
+
+   ```javascript
+   console.log(Vehicle.prototype.__proto__ === Object.prototype); // Output: true
+   ```
+
+### Visual Representation of the Prototype Chain
+
+Here's how the prototype chain looks for the `car` object created from the `Vehicle` class:
+
+```
+car (the object created)
+  └── __proto__ (links to) ── Vehicle.prototype (methods like start)
+        └── __proto__ (links to) ── Object.prototype (basic object methods)
+```
+
+### Summary of the Prototype Chain:
+
+- When you create an object using a class (like `Vehicle`), that object (`car`) has a `__proto__` that points to the class's prototype (`Vehicle.prototype`).
+- The class's prototype, in turn, has a `__proto__` that points to `Object.prototype`.
+- This chain allows the `car` object to inherit properties and methods from both `Vehicle.prototype` and `Object.prototype`.
+
+### Example of Inheritance
+
+Here’s a simple demonstration to illustrate the prototype chain:
+
+```javascript
+class Vehicle {
+  constructor(brand, model, year) {
+    this.brand = brand;
+    this.model = model;
+    this.year = year;
+  }
+
+  start() {
+    console.log(`${this.brand} ${this.model} is starting.`);
+  }
+}
+
+const car = new Vehicle("Dodge", "Charger", 2020);
+
+console.log(car.__proto__ === Vehicle.prototype); // true
+console.log(Vehicle.prototype.__proto__ === Object.prototype); // true
+```
+
+In this example:
+- The `car` object has access to the `start()` method because it looks up the prototype chain to `Vehicle.prototype`.
+- The prototype chain allows for inheritance and method sharing, making JavaScript flexible in how objects can share behaviors.
+
+Let me know if you have any more questions or if there's anything specific you'd like to explore further! -->
+
+<------------------------------------------------------------------------------------------------------------------->
+
+<!--
+Yes, in JavaScript, classes do indeed have prototypes. When you create a class using the `class` keyword, the JavaScript engine automatically creates a prototype object for that class. This prototype object contains methods and properties that are shared across all instances of that class.
+
+### Key Points About Class Prototypes
+
+1. **Class Definition and Prototype**:
+   - When you define a class, the JavaScript engine creates a prototype object for that class.
+   - Any methods you define in the class are added to this prototype object.
+
+2. **Inheritance**:
+   - Classes can inherit from other classes. If a class extends another class, the prototype of the subclass will be linked to the prototype of the superclass.
+
+3. **Instance Access**:
+   - Instances of a class (objects created using the class constructor) can access the methods defined on the class's prototype. This is done through the prototype chain.
+
+### Example
+
+Here’s a simple example to illustrate how class prototypes work:
+
+```javascript
+class Vehicle {
+  constructor(brand, model, year) {
+    this.brand = brand;
+    this.model = model;
+    this.year = year;
+  }
+
+  start() {  // This method is added to the Vehicle prototype
+    console.log(`${this.brand} ${this.model} is starting.`);
+  }
+}
+
+// Creating an instance of Vehicle
+const car = new Vehicle("Dodge", "Charger", 2020);
+
+// Accessing the start method through the prototype
+car.start(); // Output: "Dodge Charger is starting."
+
+// Checking the prototype of the car instance
+console.log(car.__proto__ === Vehicle.prototype); // true
+console.log(Vehicle.prototype); // Logs the prototype object containing the start method
+```
+
+### Breakdown of the Example
+
+1. **Class Definition**:
+   - The `Vehicle` class is defined with a constructor and a method `start()`. The `start()` method is added to `Vehicle.prototype`.
+
+2. **Instance Creation**:
+   - When you create a new instance (`car`) using `new Vehicle("Dodge", "Charger", 2020)`, JavaScript creates an empty object and sets its `__proto__` to `Vehicle.prototype`.
+
+3. **Method Access**:
+   - The `car` instance can call the `start()` method because it looks up the prototype chain to find it on `Vehicle.prototype`.
+
+4. **Prototype Check**:
+   - `car.__proto__ === Vehicle.prototype` returns `true`, confirming that `car` inherits from `Vehicle.prototype`.
+
+### Prototype Chain Visualization
+
+Here's how the prototype chain looks when you create a `car` instance:
+
+```
+car (instance)
+  └── __proto__ (points to) ── Vehicle.prototype (contains start method)
+        └── __proto__ (points to) ── Object.prototype (base object methods)
+```
+
+### Summary
+
+- **Classes in JavaScript have prototypes**, just like regular functions.
+- Methods defined in a class are added to its prototype, allowing all instances of that class to share these methods.
+- The prototype chain facilitates inheritance, enabling objects to access properties and methods from their class prototype and ultimately from `Object.prototype`.
+
+If you have more questions about class prototypes or any related topic, feel free to ask! -->
+
+<!-- <------------------------------------------------------------------------------------------------------------------->
+
+When you run `console.log(Vehicle.prototype);` after defining the `Vehicle` class, you'll get an output that represents the prototype object of the `Vehicle` class. This object contains properties and methods defined on the class, including the `constructor` property that points back to the class itself, as well as any methods you’ve defined within the class.
+
+### Example Code
+
+Here’s a complete example to show you the output in context:
+
+```javascript
+class Vehicle {
+  constructor(brand, model, year) {
+    this.brand = brand;
+    this.model = model;
+    this.year = year;
+  }
+
+  start() {
+    console.log(`${this.brand} ${this.model} is starting.`);
+  }
+}
+
+console.log(Vehicle.prototype);
+```
+
+### Expected Output
+
+When you run the above code, you would see an output similar to this (the exact output may vary slightly depending on the JavaScript environment):
+
+```javascript
+Vehicle {
+  constructor: [Function: Vehicle],
+  start: [Function: start],
+  __proto__: Object
+}
+```
+
+### Breakdown of the Output
+
+1. **`constructor: [Function: Vehicle]`**:
+
+   - This property points to the `Vehicle` class itself. It allows instances of the `Vehicle` class to access the constructor when they are created.
+
+2. **`start: [Function: start]`**:
+
+   - This property is a reference to the `start` method defined in the `Vehicle` class. It is available to all instances of the class through prototype inheritance.
+
+3. **`__proto__: Object`**:
+   - This indicates that the prototype of `Vehicle.prototype` is linked to `Object.prototype`. This is the root of the prototype chain in JavaScript. It means that `Vehicle.prototype` inherits from `Object.prototype`, which provides basic methods like `toString()`, `hasOwnProperty()`, etc.
+
+### Conclusion
+
+The `Vehicle.prototype` object is crucial in JavaScript’s prototype-based inheritance model. It allows instances of the `Vehicle` class to share methods, helping to save memory and maintain consistent behavior across all instances. If you create an instance of `Vehicle` and call the `start()` method, JavaScript will look for that method on the `Vehicle.prototype`, thus demonstrating how inheritance works in this context.
+
+If you have any more questions or need further clarification, feel free to ask! -->
+<------------------------------------------------------------------------------------------------------------------->

@@ -1,0 +1,28 @@
+html {
+  font-size: 62.5%;
+}
+
+#countLabel {
+  display: block;
+  text-align: center;
+  font-size: 16rem;
+  font-family: Helvetica;
+}
+
+#btn-container {
+  /* border: 1px solid red; */
+  text-align: center;
+}
+.btns {
+  padding: 10px 20px;
+  font-size: 4rem;
+  color: white;
+  background: hsl(193, 81%, 47%);
+  margin-left: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.1s background;
+}
+.btns:hover {
+  background: hsl(205, 100%, 52%);
+}

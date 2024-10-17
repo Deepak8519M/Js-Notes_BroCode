@@ -1,0 +1,32 @@
+.container {
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 2rem;
+  text-align: center;
+  font-weight: bold;
+}
+button {
+  font-style: 1.5rem;
+  padding: 15px 20px;
+  border-radius: 1rem;
+  border: none;
+  background: hsl(210, 100%, 50%);
+  color: white;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+button:hover {
+  cursor: pointer;
+  background: hsl(231, 100%, 44%);
+}
+button:active {
+  background: hsl(98, 100%, 50%);
+}
+input {
+  font-size: 2rem;
+  font-weight: bold;
+  /* border: 1px solid red; */
+  width: 150px;
+  text-align: center;
+  border-radius: 2px;
+  padding: 0.5rem;
+}

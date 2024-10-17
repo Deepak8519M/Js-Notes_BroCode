@@ -1,0 +1,1759 @@
+// DAY - 01:
+// ----------
+
+[--------------------------------]
+Intro:
+
+// console.log("Hello"); - to Print on console.
+
+// window.alert("Be Cautious"); - to give an pop up interface on screen
+
+// comments - (//) - to document.
+
+// <h2 id="id1"></h2> - Helpfull in Dom Manipulation.
+// document.getElementById("id1").textContent = "I tried this"; - helps in changing
+content
+
+                                                                       getElementById("id1)-to access the element with that id. and
+
+                                                                       textContent - to fill with content.
+
+[--------------------------------]
+Variables:
+
+      1)variable creation 2 steps - var_declaration,var_assignment. and they should be unique.
+
+      2)${var_Name} - used within template literals, also known as template strings. Template literals, introduced in ECMAScript 6 (ES6), provide a convenient way to create strings with embedded expressions.
+
+            ex: let gpa = 8.9;  console.log(`Your Gpa: ${gpa}`); - remember u need to use ` `
+
+      3)typeof Operator - display's type of variable.
+            ex: let age = 10;
+                console.log(typeof age); - number
+
+      4)strings - a series of characters.
+      5)booleans - true | false.
+      6)using, document.getElementById("id").textContent = variable.
+
+[--------------------------------]
+Arith Operators:
+
+    1) Operators,Operands definition
+    2) All Arth Operators (a = a+2)(*, /, -, ...)
+    3) Usage of another var for modulus Operator is a better approach compared to other operators.
+    4)  Shortcut for step 2 i.e a+=2 (a=a+2). (augmetned assignment operators)
+    5)Operator Precedence
+                1. parenthesis()
+                2. exponents
+                3. multiplication, division, & modulo
+                4. addition & substraction
+
+[--------------------------------]
+User Input:
+
+    How to accept user Input
+
+        1.Easy way - window prompt
+        2.Professional way - html textbox
+
+
+        1st_Way:    let userName = window.prompt("What is your name: ");
+                    console.log(userName);
+
+        2nd_Way:    html file:
+                                <h1 id="myH1">Welcome</h1>
+                                <label for="text">username</label>
+                                <input type="text" id="myText" />
+                                <br /><br />
+                                <button id="mySubmit">submit</button>
+
+                                <script src="app.js"></script>
+
+                    js file:
+                                console.log("app.js is loaded"); - always try to use this msg to understand whether js is loading or not.
+
+                                let userName;
+                                document.getElementById("mySubmit").onclick = function () {
+                                userName = document.getElementById("myText").value;
+                                console.log(userName);
+                                document.getElementById("myH1").textContent = `Hello ${userName}`;
+                                };
+
+[--------------------------------]
+Type Conversion:
+
+    type conversion: change the datatype of a value to another (strings, numbers, booleans)
+
+    It is mainly used to perform operations on kind of data that we want to convert it into.
+
+    ex: Whenever we take input from user it is taken in form of string. i.e let age has been asked to user and after taking the input we wanted to add +2 to age but here in this age is not a number it is string hence string concatenation takes place.
+
+    ex1: let age = window.prompt("Enter Your Age: ");
+        age = Number(age); - function to convert any dtype into number
+
+        age += 1; - addition of +1 is done
+        console.log(age, typeof age); - age along with its type has been printed.
+
+
+    ex2:    let x = "pizza";
+            let y = "pizza";
+            let z = "pizza";
+
+            x = Number(x);
+            y = String(y);
+            z = Boolean(z);
+
+            console.log(x, typeof x); - NaN 'number'
+            console.log(y, typeof y); - pizza string
+            console.log(z, typeof z); - true 'boolean'
+
+
+        here if we assign string to var of dtype number it prints it value as Nan but it dtype as 'number'
+
+        and boolean var always prints true as value if it is assinged with any kind of dtype value.
+
+
+    ex3:    let x = "0";
+            let y = "0";
+            let z = "0";
+
+            x = Number(x);
+            y = String(y);
+            z = Boolean(z);
+
+            console.log(x, typeof x); - 0 'number'
+            console.log(y, typeof y); - 0 string
+            console.log(z, typeof z); - true 'boolean'
+
+
+    here any numerical value assigned to var of string dtype enclosed in "" will be considered as string and when we add them concatenation operation is performed.
+
+    ex4:    let x = "";
+            let y = "";
+            let z = "";
+
+            x = Number(x);
+            y = String(y);
+            z = Boolean(z);
+
+            console.log(x, typeof x); - 0 'number'
+            console.log(y, typeof y); -   string
+            console.log(z, typeof z); -  false 'boolean'
+
+
+    here for Number  var we assign empty value it prints it as 0
+    here for String  var we assign empty value it prints it as an blank space which we can see in O/P.
+    here for Number  var we assign empty value it prints it as false
+
+
+    We mainly use boolean in this above examples is to understand whether the user has assigned any i/p to the var or not.
+
+    ex5:    let x;
+            let y;
+            let z;
+
+            x = Number(x);
+            y = String(y);
+            z = Boolean(z);
+
+            console.log(x, typeof x); - NaN 'number'
+            console.log(y, typeof y); - undefined string
+            console.log(z, typeof z); - false 'boolean'
+
+    here we just created a var so its dtype is undefined,
+    so converting undefined dtype to Number results in Nan as a value. (1st Case)
+    and for string it prints as undefined itself (2nd Case)
+    but for boolean it prints as false. (3rd Case)
+
+[--------------------------------]
+Const var:
+
+    const = a variable that can't be changed.
+
+    any variables that are strictly prohibited to change their values are mainly defined as const.
+
+    ex1:    const PI = 3.14159;
+            let radius;
+            let circumference;
+
+            radius = window.prompt("Enter the Radius of a Circle: ");
+            radius = Number(radius);
+
+            circumference = 2 * PI * radius;
+
+            console.log(circumference);
+
+    ex2:    html file:  <h1 id="myH1">Enter Radius of a Circle</h1>
+                        <label for="text">Radius </label>
+                        <input type="text" name="text" id="myText" />
+                        <br /><br />
+                        <button id="myBtn">submit</button>
+                        <h3 id="myH3"></h3>
+
+            js file:
+                        const PI = 3.14159;
+                        let radius;
+                        let circumference;
+
+                        document.getElementById("myBtn").onclick = function () {
+                        radius = document.getElementById("myText").value;
+                        radius = Number(radius);
+                        circumference = 2 * PI * radius;
+
+                        document.getElementById("myH3").textContent = circumference + " cm";
+                        };
+
+[--------------------------------]
+Step Counter Project is made which you can see in the project folder.
+
+[--------------------------------]
+Math Object:
+
+        Math - built in obj that provides a collection of properties and methods.
+
+        It is mostly usefull in getting math related methods.
+
+            console.log(Math.PI); - to get pi value - (3.141592653589793)
+            console.log(Math.E); - to get eulers value - (2.718281828459045)
+
+        ex1:    let a = 3.99;
+                let b = 2;
+                let c;
+
+                c = Math.round(a);  - returns nearest value - 4
+                c = Math.floor(a);  - returns - 3
+                c = Math.ceil(a);   - returns - 4
+                c = Math.trunc(a);  - returns by removing fractional part - 3
+
+                c = Math.pow(a, b); - returns the power of 2 value a and b - 15.920100000000001
+                c = Math.sqrt(a);   - returns the sqrt of given value - 1.997498435543818
+                c = Math.log(a);    - returns the log of given value - 1.3837912309017721
+
+                c = Math.sin(a);    - returns the sin of given value - -0.750228328229919
+                c = Math.cos(a);    - returns the cosine of given value - -0.66117883777488
+                c = Math.tan(a);    - returns the tan of given value - 1.1346829108365366
+
+                c = Math.abs(a);    - returns the positive value if given value is negative - 3.99 i.e --> +3.99
+
+                c = Math.sign(a);   - retursn -1 if the value is negative, +1 if val is positive and 0 if var has 0 as its value.
+
+                let max = Math.max(a, b, c); - returns max value
+                let min = Math.min(a, b, c); - returns min value
+
+                Math.random() - returns random number between 0 and 1.
+
+[--------------------------------]
+Random Number Generator Project is made which you can see in the project folder.
+
+        ex1:    let random = Math.floor(Math.random() * 6) + 1;
+                console.log(random);
+
+                to get rand num between 1 and 6 we use this format
+
+        ex2:    let random = Math.floor(Math.random() * 100) + 1;
+                console.log(random);
+
+        ex3:    To get a numbet within an certain range we use one formula or
+                equation
+
+                let randomNum = Math.floor(Math.random() * max) + min;
+
+        ex4:    const min = 50;
+                const max = 100;
+
+                let randomNum = Math.floor(Math.random() * (max-min)) + min;
+                console.log(randomNum);
+
+                To get a rand num between 50 and 100 we use this equations
+
+
+
+
+DAY - 02:
+
+[--------------------------------]
+If Statements:
+
+                If is cond stat, that exec some part of code it the cond is true else it execs another part of the code.
+
+                We use boolean variables in if stats so that,
+                                if(true){               
+                                        code execs.
+                                } else code does'nt get exec.
+
+                We also use nested if's.                                
+                        let age = 45;
+                        let hasLicense = false;
+
+                        if (age >= 16) {
+                        console.log("You are old enought to drive");
+
+                                if (hasLicense) {
+                                console.log("You have your license");
+                                } else {
+                                console.log("You do not have license yet");
+                                }
+                        } else {
+                        console.log("You must be 16+ to have a license");
+                        }
+                
+                else-if stat is used if we have more than one condition.
+
+
+[--------------------------------]
+Checked Property:                
+
+        Checked Property: it determines the checked state of an HTML checkbox or radio btn element.
+
+        by examining this property we can understand whether the radion btn is checked or not by using this we can create certaing progrms.
+
+        ex: <input type="radio" id="myRadioBtn" name="card" />
+        
+        if(myRadioBtn.checked){
+                exec the code
+        } here it returns boolean value if it is true it execs else not
+
+[--------------------------------]
+Ternary Operator:              
+
+        a Shortcut to if() and else() stat where you can write it in a single line.
+
+        ex1:    let age = 21;
+                let msg = age >= 18 ? "You are an adult" : "You are a minor";
+                console.log(msg);
+
+        ex2:    let isStudent = true;
+                let msg = isStudent ? "You are an student" : "You are not an student";
+                console.log(msg);                
+
+[--------------------------------]
+Switch Statements:
+
+        Switch - it can be an efficient replacement to many else if stats.
+        
+        we use break stat to immediately come out of the stat once the condition(mathcing Case) is met, other wise all the other stats after true stat gets executed.
+
+        we also use default value in order to get an fall back stat if any mathcing key or case is not found.
+
+        ex:
+                let day = 1;
+
+                switch (day) {
+                        case 1:
+                                console.log("It is Monday");
+                                break;
+                        case 2:
+                                console.log("It is Tuesday");
+                                break;
+                        case 3:
+                                console.log("It is Wednesday");
+                                break;
+                        case 4:
+                                console.log("It is Thursday");
+                                break;
+                        case 5:
+                                console.log("It is Friday");
+                                break;
+                        case 6:
+                                console.log("It is Monday");
+                                break;
+                        case 7:
+                                console.log("It is Sunday");
+                                break;
+                default:
+                        console.log(`${day} is not a day`);
+                }
+
+[--------------------------------]
+String Methods:
+
+        String Methods allow you to manipulate and work with text (strings).
+
+        we use string name followed with dot operator to access the methods, and at the last with the method name .
+
+        ex: let userName = "Ajay"
+            userName.charAt(0); - return first character
+
+        Various Methods:
+
+                let userName = " Bro Code ";
+                let phoneNumber = "123-456-789";
+                let phoneNumber1 = "123-456-789";
+
+                console.log(userName.charAt(0)); - returns character at 0 index.
+
+                console.log(userName.indexOf("r")); - returns the index of the specified character.
+
+                console.log(userName.length); returns the length of the string.
+
+                console.log(userName.trim());  returns the string by removing all the spaces.
+
+                console.log(userName.toUpperCase()); returns the string by converting it into uppercase.
+
+                console.log(userName.toLowerCase()); returns the string by converting it into lowercase.
+
+                console.log(userName.repeat(3)); prints the string 3 times
+
+                console.log(userName.startsWith(" ")); checks whether the string startsWith " " if yes it returns 
+                                                       true else it returns false.
+
+                console.log(userName.endsWith(" ")); checks whether the string endsWith " " if yes it returns 
+                                                     true else it returns false.
+
+                console.log(userName.includes(" ")); checks whether the string contains any white spaces if yes it 
+                                                     returns true else false.
+
+                phoneNumber = phoneNumber.replaceAll("-", " "); -  replaceAll(), replaces the whole string containing 
+                                                                  (-) into " ". 
+
+                phoneNumber1 = phoneNumber1.padStart(15, "0"); - creates an string with 15 char length where the 
+                                                                 remaining starting space is padded with 0's.
+
+                                                                 ex: 0000123-456-789
+                                                                 
+                phoneNumber1 = phoneNumber1.padEnd(15, "0");   - creates an string with 15 char length where the 
+                                                                 remaining ending space is padded with 0's.
+
+                console.log(phoneNumber);
+                console.log(phoneNumber1);
+
+                For any doubts check out the program file.
+
+[--------------------------------]
+String Slicing:
+
+                It is a Process of Creating a substring from a portion of another string.
+
+                This does not alter the original string.
+
+                        const fullName = "Bro Code";
+
+                        let firstName = fullName.slice(0, 4); - returns an dup substring that contains string from 
+                                                                index 0 to 3
+
+                        let lastName = fullName.slice(4, 8);  - returns an dup substring that contains string from 
+                                                                index 4 to 7
+
+                                                                here last index is not included.
+
+                        here eventhough we do not mentions last index it prints the string.
+
+                        let firstName = fullName.slice(0); - Bro Code 
+                        let lastName = fullName.slice(4); -  Code
+
+
+                        let firstChar = fullName.slice(0, 1); - returns an dup string containing character of index 
+                                                                0.
+
+                        let lastChar = fullName.slice(-1);    - returns the last char of string. i.e: ( e ).
+
+                        let lastChar = fullName.slice(-2);    - returns the last 2 chars of string. i.e: ( de ).
+
+
+[--------------------------------]
+Method Chaining:
+
+        It is an process of calling one method after another in one continuos line of code.
+
+        without Method Chaining ex:
+
+                        let userName = window.prompt("Enter your User Name: ");
+
+                        if (userName) {
+                        userName = userName.trim();
+
+                        let firstLetter = userName.charAt(0);
+                        firstLetter = firstLetter.toUpperCase();
+
+                        let extraChars = userName.slice(1);
+                        extraChars = extraChars.toLowerCase();
+
+                        userName = firstLetter + extraChars;
+
+                        console.log(userName);
+                        }
+
+        with Method Chaining ex:
+
+                        userName = userName.trim().charAt(0).toUpperCase() + userName.trim().slice(1).toLowerCase();
+                        console.log(userName);                
+
+[--------------------------------]
+Logical Operators:
+
+
+        logical operators: Used to combine or manipulate boolean values (true or false)
+
+        AND = &&
+        OR  = ||
+        NOT = !
+
+
+        AND Operator EX:
+
+                        const temp = 100;
+
+                        if (temp >= 0 && temp <= 30) {
+                        console.log("The Weather is Good");
+                        } else {
+                        console.log("The Weather is Bad");
+                        }
+
+        OR Operator EX:
+
+                        const temp = 100;
+
+                        if (temp < 0 || temp > 30) {
+                        console.log("The Weather is Bad");
+                        } else {
+                        console.log("The Weather is Good");
+                        }
+
+         NOT Operator EX:
+
+                        const isSunny = true;
+
+                        if (!isSunny) {
+                                console.log("It is Sunny");
+                        } else {
+                                console.log("It is Cloudy");
+                        }
+
+[--------------------------------]
+Strict Equality and InEquality:
+
+        =    assignment operator
+        ==   comparison operator (Compare if values are equal)
+        ===  strict equality operator. ( Compare if values & datatype are equal).
+        !=   inequality operator
+        !==  strict inequality operator 
+
+
+        ex:     const PI = 3.14;
+
+                if (PI === 3.14) {
+                console.log("That is PI");
+                } else {
+                console.log("This is not PI");
+                }
+
+DAY - 03:
+[--------------------------------]
+While Loop
+
+        Repeat code until some condition is true.
+
+        ex1:     let userName = "";
+
+                while (userName === "" || userName === null) {
+                userName = window.prompt("Enter Your Name:");
+                }
+
+                console.log(`Hello ${userName}`);
+
+        ex2:    let loggedIn = false;
+
+                let userName;
+                let password;
+
+                while (!loggedIn) {
+                        userName = window.prompt("Enter user Name:");
+                        password = window.prompt("Enter user password:");
+
+                        if (userName === "myUserName" && password === "myPassword") {
+                                loggedIn = true;
+                                console.log("You are logged IN");
+                        } else {
+                                console.log("Enter valid credentials, please try again");
+                        }
+                }
+
+
+        We also discussed about do while loop.
+
+        syntax:  do{
+                    // statements
+                 }while(condition);
+
+[--------------------------------]
+For Loop
+
+        It repeats some code a Limited amount of time.
+
+        ex:     for (let i = 0; i <= 2; i++) {
+                        console.log("Hello");
+                }
+
+        continue - skip the particular iteration .
+        break    - breaks out of loop entirely used mainly in switch cases.
+
+
+[--------------------------------]
+Number Guessing Game:
+
+        Once Visit the proj file to understand.
+
+[--------------------------------]
+Function:
+
+        A function is a reusable code.You declare it once and use it whenever u want. For that u need to call the function.
+
+
+        ex:     function happyBirthday(name, age) {
+                console.log("Happy Birthday to You");
+                console.log("Happy Birthday to You");
+                console.log(`Happy Birthday dear ${name}`);
+                console.log("Happy Birthday to You");
+                console.log(`You are ${age} years old`);
+                }
+
+                happyBirthday("Ajay", 34);
+                happyBirthday("Sharma", 45);
+
+        here the order of args matter a lot.
+
+        ex2:
+                function add(x, y) {
+                        return x + y;
+                }
+                function sub(x, y) {
+                        return x - y;
+                }
+                function mul(x, y) {
+                        return x * y;
+                }
+                function div(x, y) {
+                        return x / y;
+                }
+                function isEven(number) {
+                        return number % 2 === 0 ? true : false;
+                }
+
+                function isValidEmail(email) {
+                //   if (email.includes("@")) {
+                //     return true;
+                //   } else {
+                //     return false;
+                //   }
+
+                return email.includes("@") ? true : false;
+                }
+                console.log(add(3, 4));
+                console.log(sub(3, 4));
+                console.log(mul(3, 4));
+                console.log(div(12, 4));
+
+                console.log(isEven(11));
+
+                console.log(isValidEmail("bro@fake.com"));
+
+[--------------------------------]
+Var Scope: 
+
+        It is the place at which the variable is recognized or accessible.
+
+                        function func1() {
+                                let x = 10;
+                                console.log(x);
+                        }
+
+                        function func2() {
+                                let x = 20;
+                                console.log(x);
+                        }
+                        func1(); - example of local scope.
+
+                and global scope is used outside of block
+
+                also we local instance of var first later at global.       
+
+                        x=20; - global scope
+                        function func1() {
+                                let x = 10; // first x = 10 if not then x = 20
+                                console.log(x);
+                        }
+                        function func2() {
+                                let x = 30;
+                                console.log(x);
+                        }
+                        func1();                 
+
+[--------------------------------]
+Temp Conversion Program:
+
+        This program has been listed in the projects folder if you do want to check it do read this.
+                        
+
+
+DAY - 04:
+[--------------------------------]
+
+        Array:  A variable like structure that can hold more than 1 value.
+
+                Should be enclosed within [];
+
+                Values inside the arr are termed as elements.
+
+                We can access the values using indexes. (starts from 0 to n-1)
+
+                        ex:let fruits = ["apple", "orange", "banana"];
+
+                        console.log(fruits[0]);
+                        console.log(fruits[1]);
+                        console.log(fruits[2]);
+
+                We use for loops to iterate the elements in the array.                        
+                        
+        Array Methods:
+
+
+                fruits.push("coconut"); - appends or pushes element at the end of the Array(last index)
+
+                fruits.pop("coconut"); - removes elem from last index of an Array
+
+                fruits.unshift("mango"); - Inserts new elements at the start of an array, and returns the new length of the array.
+
+                fruits.shift(); - Removes the first element from an array and returns it. If the array is empty, undefined is returned 
+
+                fruits.length : returns length of the array
+
+                        ex: let numOfFruits = fruits.length; -> 3
+                
+                fruits.indexOf("apple"); - Returns the index of the first occurrence of a value in an array, or -1 if it is not present.
+
+                        ex: let index = fruits.indexOf("apple"); - 0
+
+                fruits.sort(); - sorts elems in alphabetical order.
+
+                fruit.sort().reverse(); - returns elems in reverse order.
+
+
+        Enhanced For Loop: Shortcut to display elements of an array.
+
+                for (let fruit of fruits) {
+                        console.log(fruit);
+                }
+
+
+[--------------------------------]
+2D - ARRAY:                
+
+        It is an multi dimensional array that stores a matix of data in rows and columns.
+
+        Usefull for games, spreadsheets, or representing imgs.
+
+        To access the elems in an array we use 2 indexes i.e one for row and the other for the column.
+
+                const matrix = [
+                [1, 2, 3],
+                [4, 5, 6],
+                [7, 8, 9],
+                ]; 
+
+        here each row in an 2D array is itself an array.
+
+
+        ex1:const matrix = [
+                                [1, 2, 3],
+                                [4, 5, 6],
+                                [7, 8, 9],
+                          ];
+
+                        for (let row of matrix) {
+                                const rowString = row.join("  ");
+                                console.log(rowString);
+                        }
+-----------------------------------------------------------------------------------------------
+WORKING:
+
+        The for...of loop iterates over each subarray (row) in the matrix. On each iteration, row refers to one of the subarrays.
+
+                On the first iteration, row = [1, 2, 3]
+                On the second iteration, row = [4, 5, 6]
+                On the third iteration, row = [7, 8, 9]                       
+
+
+        The join(" ") method converts each subarray (row) into a string, where each element is joined by two spaces (" "). For example:
+
+                [1, 2, 3] becomes "1 2 3"
+                [4, 5, 6] becomes "4 5 6"
+                [7, 8, 9] becomes "7 8 9"
+------------------------------------------------------------------------------------------------
+
+Note: The sub arrays can be non-uniform.
+
+ex:const matrix = [
+                [0, 1, 2, 3],
+                [4, 5, 6],
+                [7, 8, 9],
+        ];
+
+[--------------------------------]
+Iterables:
+
+        In JavaScript, iterables are objects that allow you to iterate over their values, meaning you can loop through their contents using constructs like for...of, spread operator (...), or other iteration mechanisms.
+
+[--------------------------------]
+Spread Operator:        
+
+        It is an Operator that allows an iterable such as an array or string to be expanded into seperate elements. (unpacks the elems)
+
+
+------------------------------------------------------------------------------------------------
+        ex1:    let numbers = [1, 2, 3, 4, 5];
+
+                let maximum = Math.max(...numbers);
+                let minimum = Math.min(...numbers);
+
+                console.log(maximum);
+                console.log(minimum);
+
+        Math.max() is a JavaScript method that returns the largest number from a set of values.
+
+        The ...numbers is the spread operator. It expands the array into individual elements. So instead of passing the array itself, it passes each element of the array as a separate argument to Math.max().
+
+        In this case, the Math.max(...numbers) is equivalent to Math.max(1, 2, 3, 4, 5), which returns 5.
+------------------------------------------------------------------------------------------------
+
+        ex2:    let userName = "Bro Code";
+
+                let letters = [...userName].join("-");
+
+                console.log(letters);
+
+        The spread operator (...) is used here to break the string userName into individual characters.
+
+        When you spread a string, it creates an array where each element is a single character from the string.
+        For example:
+
+        userName is "Bro Code".
+        Using ...userName transforms it into: ['B', 'r', 'o', ' ', 'C', 'o', 'd', 'e'].
+
+        The join("-") method is called on the array of characters created from the string. This method takes all the elements in the array and joins them together into a single string, with each element separated by a hyphen (-).
+        In this case:
+
+        The array ['B', 'r', 'o', ' ', 'C', 'o', 'd', 'e'] becomes "B-r-o- -C-o-d-e" (note the space character is treated as any other character and also gets separated by hyphens).
+
+------------------------------------------------------------------------------------------------
+
+Shallow Copy:
+
+        A shallow copy is a copy of an object or array where only the top-level elements are copied. If the original object or array contains other objects or arrays as elements (nested structures), the references to those objects or arrays are copied, not the actual objects themselves. This means that changes made to the nested objects in the copied version will affect the original as well, because both the original and the copy are referencing the same nested objects.
+
+        foods now contains the same values as fruits, but it is a new array.
+
+        If you modify foods (e.g., change an element), it won’t affect fruits, because at the top level, foods and fruits are two separate arrays.
+        
+        Shallow Copy Behavior:
+        ---------------------
+        Top-Level Elements: Primitive values like strings, numbers, and booleans are copied as values.
+
+        Nested Objects/Arrays: If the array contains objects or nested arrays, only the references to those nested objects/arrays are copied, not the objects themselves.        
+
+-------------------------------------------------------------------------------------------------
+Example with Nested Array (Shallow Copy Behavior):
+
+        let fruits = ["apple", "banana", { type: "citrus", name: "orange" }];
+        let foods = [...fruits];  // Shallow copy
+
+        // Modify a primitive element
+        foods[0] = "pear";
+        console.log(fruits[0]);  // Output: "apple" (no effect on original)
+
+        // Modify a nested object
+        foods[2].name = "lemon";
+        console.log(fruits[2].name);  // Output: "lemon" (this affects the original object)
+
+-------------------------------------------------------------------------------------------------
+  Explanation:
+  ----------->
+
+        Primitive Elements ("apple", "banana"): These are copied by value, so modifying them in the foods array doesn't affect the original fruits array.
+
+        Nested Object ({ type: "citrus", name: "orange" }): The reference to this object is copied, so both fruits and foods share the same nested object. Modifying the name property in foods also changes it in fruits, because they point to the same object in memory.
+
+
+Shallow Copy vs. Deep Copy:
+-------------------------->
+
+Shallow Copy: Only the top-level elements are copied, while references to nested objects or arrays are copied, leading to shared references.
+
+Deep Copy: A deep copy creates a complete, independent copy of the entire object or array, including all nested objects or arrays. Changes to the deep copy do not affect the original at any level.
+
+------------------------------------------------------------------------------------------------
+                let fruits = ["apple", "banana", "orange"];
+                let vegetables = ["carrots", "celery", "potato"];
+
+                let foods = [...fruits, ...vegetables, "eggs", "milk"];
+
+                console.log(foods);
+
+        We can also append other elems("eggs", "milk") as shown above.
+
+                Simple Understanding:
+
+                        Before Spread:
+                                fruits = ["apple", "banana", "orange"];
+
+                        After Spread:
+                                ...fruits -> "apple", "banana", "orange"
+
+                        When used in new Array:
+                        
+                                let foods = [...fruits];  // Equivalent to let foods = ["apple", "banana", "orange"];
+                        
+
+
+
+
+[--------------------------------]
+Rest Operator:
+
+        (...rest) allows a fucntion to work with a variable number of args by bundeling them into an array.
+
+        Simple Descr:
+                spread - expands an array into separate elements.
+                rest   - bundles seperate elems into an array.
+
+        The rest parameter in JavaScript allows you to pass an indefinite number of arguments to a function as an array. It is written using three dots (...) followed by the name of the parameter. The rest parameter syntax enables a function to accept and handle more arguments than it explicitly defines.
+
+        Key Features:
+                The rest parameter must be the last parameter in the function signature.
+                The rest parameter gathers all remaining arguments passed to the function into a single array.
+                There can only be one rest parameter in a function. 
+                It's useful when you don't know how many arguments will be passed to a function.               
+
+        You can't directly use array methods like map() or reduce() on it without converting it to an array first.
+
+        The rest parameter is a real array, which means you can immediately use array methods like forEach(), map(), filter(), etc.
+
+----------------------------------------------------Chat_Gpt_Example-------------------------------------------------
+
+        ex1:    function greet(greeting, ...names) {
+                        return `${greeting}, ${names.join(" and ")}`;
+                }
+
+                console.log(greet("Hello", "Ajay", "Sharma", "Raj")); 
+                // Output: Hello, Ajay and Sharma and Raj
+
+Explanation: greet("Hello", "Ajay", "Sharma", "Raj") passes "Hello" as the greeting, and the rest ("Ajay", "Sharma", "Raj") are collected into the names array. names will be ["Ajay", "Sharma", "Raj"].
+
+---------------------------------------------------------------------------------------------------------------------
+
+        ex2:     function openFridge(...food) {
+                        console.log(food);
+                }
+                const food1 = "pizza";
+                const food2 = "hamburger";
+                const food3 = "burger";
+                const food4 = "sushi";
+
+                openFridge(food1, food2, food3, food4);
+
+       
+        ex3:    function getFoods(...food) {
+                        return food;
+                }
+
+                const food1 = "pizza";
+                const food2 = "hamburger";
+                const food3 = "burger";
+                const food4 = "sushi";
+
+                const a = getFoods(food1, food2, food3, food4);
+                console.log(a);
+
+        ex4:    function sum(...numbers) {
+                        let result = 0;
+
+                        for (number of numbers) {
+                                result += number;
+                        }
+                        return result;
+                }
+
+                function getAvg(...numbers) {
+                        let result = 0;
+
+                        for (number of numbers) {
+                                result += number;
+                        }
+                        return result / numbers.length;
+                }
+
+                const total = sum(10, 20, 30, 405, 50, 60);
+                console.log(`Your total is ${total} $`);
+
+                const avg = getAvg(10, 20, 30, 405, 50, 60);
+                console.log(`Your total avg is ${avg} $`);
+
+        ex5:    function combineString(...strings) {
+                        return strings.join(" ");
+                }
+
+                const fullName = combineString("Ajay", "Shukla", "Vas ", "Sharma");
+                console.log(fullName);
+
+                It also helps in you in combine the strings.
+
+
+[--------------------------------]
+Reference:
+
+        In JavaScript, reference refers to the memory address where a value is stored. Instead of copying the actual data, objects (including arrays and functions) are stored in memory, and variables that hold these objects don't contain the actual data. Instead, they refer to the location in memory where the object is stored. This is known as passing by reference.
+
+        refer this link: https://chatgpt.com/c/66f6a3fa-b324-8007-aa56-b9c2f1b47408.
+
+[--------------------------------]
+Dice Roller Project:
+
+        This project can be seen in the proj folder.
+
+[--------------------------------]
+Random Password Generator:
+
+
+[--------------------------------]
+Call Back in Js:
+
+        A Function that is passed as an arg to another fucntion.
+
+        It is used  mainly to handle asynchronous operations(operations take variable amount of time):
+                1. Reading a file
+                2. Netowork Requests.
+                3. Interacting with databases.
+
+        Like, Hey when  you are done call the next.
+
+                function hello() {
+                        setTimeout(function () {
+                        console.log("Hello");
+                        }, 3000);
+                }
+                function goodBye() {
+                        console.log("Good Bye");
+                }
+
+                hello();
+                goodBye(); 
+                
+                - here we could see in an abnormal (not in real sense but for the meaning) way the goodBye( ) executed first then hello().
+
+                So to guarantee that hello( ) execs first we use callback concept.
+
+                So mainly here we are guaranteeing that function passed will be executed next.
+
+
+        ex1:     function hello(callback) {
+                        console.log("Hello");
+                        callback();
+                }
+                function goodBye() {
+                        console.log("Good Bye");
+                }
+
+                hello(goodBye); - now the are printed in sequential order.
+        
+
+        ex2:    function sum(x, y, callback) {
+                        let result = x + y;
+                        callback(result);
+                }
+                function showResult(result) {
+                        console.log(`You'r result is ${result}`);
+                }
+                function displayPage(result) {
+                        document.getElementById("myH1").textContent = result;
+                }
+
+                sum(10, 20, showResult);
+                sum(10, 20, displayPage);
+
+
+--------------------------------------------------------------------------------------------------------------------
+Asynchronous operations let your code handle tasks that take time (like fetching data from a server) without waiting for them to finish. Instead of pausing everything, your program moves on to the next task and comes back when the slow task is done.
+
+
+Key points:
+Synchronous: Tasks run one after another, waiting for each to finish.
+Asynchronous: Tasks can run in the background, and when they’re done, the result is handled (without blocking other code).
+
+Ways to manage asynchronous code:
+Callbacks: A function is called when the task is finished.
+Promises: An object that represents the result of an async task (success or failure).
+Async/Await: A cleaner way to write asynchronous code, making it look like normal code.
+
+--------------------------------------------------------------------------------------------------------------------
+
+[--------------------------------]
+forEach Method:
+
+        This method is used to iterate over the elements of an array and apply a specified function (callback) to each element.
+
+        array.forEach(callback);
+
+        forEach method provides or takes 3 args elment, index, array.
+
+        The forEach() method in JavaScript is used to loop through each element of an array and apply a specified function to each element. It provides a simpler and cleaner way to iterate over arrays compared to traditional for loops.
+
+        Key Points:
+        1) forEach() is a method available on all arrays.
+        2) It executes a provided function once for each array element.
+        3) The function can take up to three arguments: the current element, the index of the element, and the array itself.
+
+        What forEach() Doesn't Do:
+
+                Does not return anything: Unlike methods like map(), forEach() always returns undefined. It’s mainly used for executing side effects (e.g., logging, modifying values).
+
+                Cannot break out of the loop: You cannot use break or return to exit out of a forEach() loop early. If you need that, a traditional for loop or some() method might be better suited.
+
+        When to Use forEach():
+
+                When you want to perform an action for each element in an array (like logging or modifying items).
+
+                When you don’t need to return a new array (if you do, use map() instead).
+
+
+        ex:     let numbers = [1, 2, 3, 4, 5];
+
+                function display(element) {
+                        console.log(element);
+                }
+                function double(element, index, array) {
+                        array[index] = element * 2;
+                }
+                function triple(element, index, array) {
+                        array[index] = element * 3;
+                }
+                function square(element, index, array) {
+                        array[index] = Math.pow(element, 2);
+                }
+                function cube(element, index, array) {
+                        array[index] = Math.pow(element, 3);
+                }
+
+                numbers.forEach(cube);
+                numbers.forEach(display);
+
+        ex2:    let fruits = ["apple", "orange", "banana", "coconut"];
+
+                function upperCase(element, index, array) {
+                        array[index] = element.toUpperCase();
+                }
+                function lowerCase(element, index, array) {
+                        array[index] = element.toLowerCase();
+                }
+                function capitilize(element, index, array) {
+                        array[index] = element.charAt(0).toUpperCase() + element.slice(1);
+                }
+                function display(element) {
+                        console.log(element);
+                }
+
+                fruits.forEach(capitilize);
+                fruits.forEach(display);
+
+
+[--------------------------------]
+map Method:
+
+        Bro Code_Def: accepts a callback and applies the function to each element of an array, then returns a new array
+
+
+        The map() method in JavaScript is used to create a new array by applying a function to each element of an existing array. Unlike forEach(), which performs an operation on each element but does not return a new array, map() creates and returns a new array with the results.
+
+        Key Points:
+                Returns a new array: map() does not modify the original array but instead returns a new one.
+                Transformation: It’s useful when you want to transform or modify the elements of an array.
+                The function you pass to map() is called for each element, and the returned value is placed in the new array.
+
+        How map() Works:
+                It goes through each element in the array.
+                It applies the function to each element and gets the result.
+                It puts the result in a new array.
+                Finally, it returns the new array.
+
+        Comparison with forEach():
+                map(): Creates a new array with transformed elements and returns it.
+
+                forEach(): Executes a function for each element but doesn’t return anything or create a new array.
+                
+                ex:     const numbers = [1, 2, 3, 4, 5, 6];
+
+                        function square(element) {
+                                return Math.pow(element, 2);
+                        }
+                        function cube(element) {
+                                return Math.pow(element, 3);
+                        }
+
+                        const squares = numbers.map(square);
+                        console.log(squares);
+
+--------------------------------------------------------------------------------------------------------------------
+WORKING-2:
+
+Here, the map() method is called on the numbers array.
+The map() method iterates through each element of the numbers array and applies the square function to each element.
+For each element in the numbers array, the following happens:
+For 1: square(1) returns 1
+For 2: square(2) returns 4
+For 3: square(3) returns 9
+For 4: square(4) returns 16
+For 5: square(5) returns 25
+For 6: square(6) returns 36
+The results of these function calls are collected into a new array.
+This new array, which contains the squared values, is stored in the constant variable squares.                
+--------------------------------------------------------------------------------------------------------------------
+
+        ex2:    const students = ["kRanol", "MariO", "SharMa", "saNdy"];
+
+                function upperCase(element) {
+                        return element.toUpperCase();
+                }
+                function lowerCase(element) {
+                        return element.toLowerCase();
+                }
+
+                const studentsLower = students.map(upperCase);
+                const studentsUpper = students.map(lowerCase);
+
+                console.log(studentsLower);
+                console.log(studentsUpper);
+
+
+        ex3:    const dates = ["2024-1-10", "2025-2-20", "2026-5-10", "2029-6-19"];
+
+                function formatDates(element) {
+                        const parts = element.split("-");
+                        return `${parts[2]}/${parts[1]}/${parts[0]}`;
+                }
+
+                const formatedDates = dates.map(formatDates);
+                console.log(formatedDates);
+
+--------------------------------------------------------------------------------------------------------------------
+WORKING-3:
+
+This line creates a constant array called dates, which contains string representations of dates in the format "YYYY-M-D":
+
+"2024-1-10" (January 10, 2024)
+"2025-2-20" (February 20, 2025)
+"2026-5-10" (May 10, 2026)
+"2029-6-19" (June 19, 2029)
+
+Here, a function named formatDates is defined.
+It takes a single parameter called element, which represents each date string from the dates array.
+
+Inside the function:
+element.split("-"): This method splits the date string into an array of parts using the - character as a delimiter.
+
+For example:
+For "2024-1-10", it produces ["2024", "1", "10"].
+The parts array contains three elements: [year, month, day].
+The function then returns a formatted date string in the format "day/month/year" using template literals:
+For example, return ${parts[2]}/${parts[1]}/${parts[0]}; converts ["2024", "1", "10"] to "10/1/2024".
+
+
+FLOW OF PROGRAM:
+-------------->
+
+Using map(): When you call dates.map(formatDates), the following happens:
+
+The map() method creates a new array to hold the results.
+It goes through each element in the dates array one by one.
+Function Application:
+
+For each element in the dates array, the formatDates function is called.
+Here’s how it processes each element:
+
+First Element:
+Input: "2024-1-10"
+The function splits it into ["2024", "1", "10"] and returns "10/1/2024".
+This result is stored in the new array.
+
+Second Element:
+Input: "2025-2-20"
+The function splits it into ["2025", "2", "20"] and returns "20/2/2025".
+This result is also stored in the new array.
+
+Third Element:
+Input: "2026-5-10"
+The function splits it into ["2026", "5", "10"] and returns "10/5/2026".
+This result is stored in the new array.
+
+Fourth Element:
+Input: "2029-6-19"
+The function splits it into ["2029", "6", "19"] and returns "19/6/2029".
+This result is stored in the new array.
+
+Final Output:
+When you log the formatedDates array, you see the transformed dates in the desired format.
+
+Summary:
+The map() method goes through each element of the original array (dates), applies the formatDates function to each element one at a time, and collects the results in a new array (formatedDates).
+
+--------------------------------------------------------------------------------------------------------------------
+
+
+[--------------------------------]
+filter Method:
+
+        The filter() method in JavaScript is a powerful array method that creates a new array containing all elements from the original array that pass a specified test (i.e., meet a certain condition). It does not modify the original array but returns a new one.
+
+
+        How It Works:
+
+                Original Array: You start with an array of items.
+
+                Condition: You define a condition (a test) that each item in the array will be checked against.
+                
+                New Array: filter() goes through each item in the original array and keeps only those that pass the test, creating a new array.
+
+
+
+        ex1:     let numbers = [1, 2, 3, 4, 5, 6, 7];
+
+                function isEven(element) {
+                return element % 2 === 0;
+                }
+                function isOdd(element) {
+                return element % 2 !== 0;
+                }
+
+                const evenNums = numbers.filter(isEven);
+                const oddNums = numbers.filter(isOdd);
+
+                console.log(evenNums);
+                console.log(oddNums);
+
+
+        ex2:    const ages = [15, 67, 34, 56, 23, 21, 45, 23, 62, 12, 2];
+
+                function isAdult(element) {
+                        return element >= 18;
+                }
+                function isChild(element) {
+                        return element < 18;
+                }
+                const adults = ages.filter(isAdult);
+                const children = ages.filter(isChild);
+
+                console.log(children);
+                console.log(adults);
+                
+        ex3:    const words = ["apple", "banana", "kiwi", "peomgranate", "coconut"];
+
+                function getShortWords(element) {
+                        return element.length <= 6;
+                }
+                function getLongWords(element) {
+                        return element.length > 6;
+                }
+
+                const shortWords = words.filter(getShortWords);
+                const longWords = words.filter(getLongWords);
+
+                console.log(shortWords);
+                console.log(longWords);
+
+        Important Points:
+
+                1) Non-Mutating: The filter() method does not change the original array; it creates a new one.
+
+                2) Empty Array: If no elements pass the test, the method returns an empty array.
+
+                3) Callback Function: The callback function can be defined as a separate function or as an inline arrow function, as shown in the examples above.
+
+                4) Short-Circuiting: The filter() method stops evaluating as soon as it has traversed the entire array.
+
+        Summary:
+
+         The filter() method is a convenient way to create a new array of elements that meet specific criteria without mutating the original array. It’s widely used for tasks like data filtering and selecting subsets of data based on certain conditions.
+
+[--------------------------------]
+reduce Method:
+
+        Bro Code_Def: reduce the elements of an array into a single value.
+
+
+        The reduce() method in JavaScript is a powerful array method that executes a reducer function on each element of the array, resulting in a single output value. It can be used to accumulate or "reduce" all elements in an array to a single value, such as a sum, product, or a concatenated string.
+
+        Parameters:
+
+                Accumulator: The accumulated value previously returned in the last invocation of the callback, or initialValue, if supplied.
+
+                CurrentValue: The current element being processed in the array.
+
+                CurrentIndex (optional): The index of the current element being processed.
+
+                Array (optional): The original array upon which reduce() was called.
+
+                InitialValue (optional): A value to use as the first argument to the first call of the callback function. If no initial value is provided, the first element of the array will be used, and reduce() will start from the second element
+
+
+        ex1:    const prices = [5, 10, 34, 2, 31, 45, 6, 78, 1];
+
+                const total = prices.reduce(toSum);
+
+                function toSum(accumulator, element) {
+                return accumulator + element;
+                }
+
+                console.log(Your Total is ${total.toFixed(2)});
+
+
+        ex2:    const grades = [75, 50, 90, 65, 23, 100];
+
+                const maximum = grades.reduce(getMax);
+                const minimum = grades.reduce(getMin);
+
+                function getMax(accumulator, element) {
+                return Math.max(accumulator, element);
+                }
+                function getMin(accumulator, element) {
+                return Math.min(accumulator, element);
+                }
+
+                console.log(maximum);
+                console.log(minimum);
+
+WORKING-2:
+--------->
+
+        The reduce() method initializes the accumulator with the first value of the array, which is 75.
+
+        It then proceeds through the array, applying the getMax function:
+
+        First iteration: Math.max(75, 50) returns 75
+        Second iteration: Math.max(75, 90) returns 90
+        Third iteration: Math.max(90, 65) returns 90
+        Fourth iteration: Math.max(90, 23) returns 90
+        Fifth iteration: Math.max(90, 100) returns 100
+
+        The final result is 100, which is the highest grade in the grades array.                           
+
+--------------------------------------------------------------------------------------------------------------------
+WORKING-1:
+
+### Code Breakdown
+
+1. **Initialization of the Array**:
+   
+        const prices = [5, 10, 34, 2, 31, 45, 6, 78, 1];
+   
+   - Here, an array called `prices` is created, containing various numerical values that represent prices.
+
+2. **Using `reduce()`**:
+   
+   const total = prices.reduce(toSum);
+   
+   - The `reduce()` method is called on the `prices` array.
+   - The `toSum` function is passed as the callback function to `reduce()`.
+   - This function will be applied to each element of the array to calculate the total sum.
+
+3. **The `toSum` Function**:
+   
+   function toSum(accumulator, element) {
+     return accumulator + element;
+   }
+   
+   - This function takes two parameters:
+
+     - **`accumulator`**: This is the accumulated value (the total sum so far).
+     - **`element`**: This is the current element being processed from the `prices` array.
+
+   - Inside the function, the current element is added to the accumulator, effectively summing the prices as the `reduce()` method iterates through the array.
+
+4. **Final Calculation**:
+
+   - The `reduce()` method initializes the `accumulator` with the first value of the array (in this case, `5`).
+   - It then proceeds through the array, applying the `toSum` function:
+     - First iteration: `5 + 10 = 15`
+     - Second iteration: `15 + 34 = 49`
+     - Third iteration: `49 + 2 = 51`
+     - Fourth iteration: `51 + 31 = 82`
+     - Fifth iteration: `82 + 45 = 127`
+     - Sixth iteration: `127 + 6 = 133`
+     - Seventh iteration: `133 + 78 = 211`
+     - Eighth iteration: `211 + 1 = 212`
+   - The final result, which is the total sum of all the prices, is `212`.
+
+5. **Output**:
+   
+   console.log(`Your Total is ${total.toFixed(2)}`);
+   
+   - The result is printed to the console.
+   - `total.toFixed(2)` formats the number to two decimal places, so if the result were a decimal value, it would show two digits after the decimal point (e.g., `212.00`).
+
+### Complete Flow
+1. Create an array of prices.
+2. Use the `reduce()` method to sum all elements in the array using the `toSum` function.
+3. Output the total formatted to two decimal places.
+
+### Final Output
+The output will be:
+
+Your Total is 212.00
+
+
+This message confirms that the total sum of all prices in the `prices` array is `212.00`.
+--------------------------------------------------------------------------------------------------------------------
+
+        Use Cases:
+
+                Summing numbers: As shown in Example 1.
+                Flattening arrays: As shown in Example 2.
+                Counting instances of values: For example, counting the number of times a specific item appears in an array.
+                Building objects: Accumulating data into an object format.
+
+
+        Conclusion:
+
+                The reduce() method is versatile and can be used in various scenarios where you need to derive a single value from an array. It provides a functional approach to processing data and can make your code cleaner and more expressive.
+
+
+[--------------------------------]
+Reference:
+
+In JavaScript, both objects and arrays are reference types, meaning that when you assign them to a variable, you're actually storing a reference to their memory location, not the actual data itself. Here’s a breakdown of how this works for both objects and arrays:
+
+        1. Objects:
+        ---------->
+
+        When you create an object and assign it to a variable, the variable holds a reference to that object in memory.
+
+                const person = {
+                name: "Alice",
+                age: 25
+                };
+
+                const anotherPerson = person; // anotherPerson holds a reference to the same object
+
+                anotherPerson.age = 30; // Modifying through anotherPerson
+
+                console.log(person.age); // Output: 30 (because both variables reference the same object)
+
+
+        2. Arrays:
+        ---------->
+
+        Similarly, when you create an array and assign it to a variable, that variable holds a reference to the array.
+        
+
+                const numbers = [1, 2, 3];
+                const moreNumbers = numbers; // moreNumbers holds a reference to the same array
+
+                moreNumbers.push(4); // Modifying through moreNumbers
+
+                console.log(numbers); // Output: [1, 2, 3, 4] (both variables reference the same array)
+
+
+        3. Functions:
+        ------------->
+
+        Functions in JavaScript are also objects. When you assign a function to a variable, that variable holds a reference to the function.
+
+                function greet() {
+                console.log("Hello!");
+                }
+
+                const sayHello = greet; // sayHello holds a reference to the greet function
+
+                sayHello(); // Output: Hello!
+
+        <------->
+         Summary:
+        <------->
+        Variables for Objects, Arrays, and Functions: When you declare a variable for an object, array, or function, you're storing a reference to that entity, not a copy of the entity itself.
+
+        Implications: Because of this behavior, if you modify the object, array, or function through one variable, those changes will be reflected when accessed through any other variable referencing the same entity.
+
+
+
+DAY - 05:
+[--------------------------------]        
+
+Function Expressions:
+
+        function declaration - defines a reusable block of code that performs a specific task.
+
+        function expression - a way to define functions as values or variables.
+
+
+        so it is usefull when it is difficult to handle creation of names for every function.
+        and in some other concepts like:
+
+                1) Callback in asynchronous functions
+                2) Higher-Order functions
+                3) Closures
+                4) Event Listeners
+
+
+        ex:     const hello = function () {
+                        console.log("Hello ");
+                };
+
+                hello();
+
+        *->here in js function can be consideered as values.
+        *->We can also pass function as value  of args i.e:
+
+                setTimeout(function () {
+                        console.log("Hello this is set timeout function so it might be in delay");
+                }, 4000);
+
+
+        Usage of function expression for array methods:
+
+        ex1:    const numbers = [1, 2, 3, 4, 5];
+
+                const squares = numbers.map(function (element) {
+                        return Math.pow(element, 2);
+                });
+                console.log(squares);
+
+                const cubes = numbers.map(function (element) {
+                        return Math.pow(element, 3);
+                });
+                console.log(cubes);
+
+                const total = numbers.reduce(function (accumulator, element) {
+                        return accumulator + element;
+                });
+                console.log(total);
+
+
+[--------------------------------]
+Arrow Functions:
+
+        A concise way to write function expressions, good for simple functions that you use only once .
+
+        syntax:     (parameters) => some code
+
+                ex1:    const Hello = (name, age) => {
+                                console.log(`Hello ${name}`);
+                                console.log(`You are ${age} Old`);
+                        };
+                        Hello("ajay", 24);
+
+
+                ex2:    setTimeout(() => console.log("Hello how are you?"), 3000);
+
+        Function with map filter and reduce.
+
+        NOTE: We do not need return statement if we have only a single line of code in function.
+
+
+                const numbers = [10, 20, 30, 40, 50, 60];
+
+                const squares = numbers.map((element) => {
+                        return Math.pow(element, 2);
+                });
+
+                const cube = numbers.map((element) => {
+                        return Math.pow(element, 3);
+                });
+
+                const sum = numbers.reduce((accumulator, element) => accumulator + element);
+
+                console.log(squares);
+                console.log(cube);
+                console.log(sum);
+
+
+[--------------------------------]
+Objects:
+
+        A collection of related properties an methods which can represent real world objects (people, products, places, items)
+
+        objs can't have same name.
+
+        syntax: object = {   key:value;
+                             function()
+                          }
+
+
+        ex:     const person1 = {
+                        firstName: "Ajay",
+                        lastName: "Sharma",
+                        age: 18,
+                        sayHello: function () {
+                                console.log("Hi! I am spongebob");
+                        },
+                };
+                const person2 = {
+                        firstName: "Ajay1",
+                        lastName: "Karma1",
+                        age: 18,
+                };
+
+                console.log(person1.firstName);
+                console.log(person2.lastName);
+                console.log(person1.age);
+                person1.sayHello();
+                
+[--------------------------------]
+this Operator:
+
+        It is an reference to the object where THIS is used.
+        (this object depends on the immediate context)
+
+        this keyword doesnt work with arrow functions. as it is references to the window object only.
+
+
+        const person1 = {
+                name: "ajay",
+                favFood: "Hamburger",
+                sayHello: function () {
+                console.log(`HI I am ${this.name} my Favourite food is ${this.favFood}`);
+        },
+        };
+
+        const person2 = {
+                name: "sharma",
+                favFood: "Pizza",
+                sayHello: function () {
+                console.log(`HI I am ${this.name} my Favourite food is ${this.favFood}`);
+        },
+        };
+
+        person1.sayHello();
+        person2.sayHello();
+
+
+[--------------------------------]
+Constructors in Js:
+
+        special method for defining the properties and methods of Objects.
+
+                function Car(make, model, year, color) {
+                        this.make = make,
+                        this.model = model,
+                        this.year = year,
+                        this.color = color;
+                        this.drive = function () {
+                        console.log(`${this.model}`);
+                        };
+                }
+
+                const car1 = new Car("Ford", "Mustang", 2024, "red");
+                const car2 = new Car("Bolero", "SemiTruck", 2013, "blue");
+                const car3 = new Car("Dodge", "Charger", 2020, "silver");
+
+                console.log(car1.color);
+                console.log(car2.color);
+                console.log(car3.color);
+                car1.drive();
+                car2.drive();
+                car3.drive();
+
+
+
+Note:   The const keyword ensures that the reference to the car3 object cannot be reassigned to another object orvalue. For example, you can't later write car3 = new Car(...) and change its value.
+
+        However, you can still change the properties of car3 like car3.color = "red"; because the object itself is still mutable.
+                
+
+[--------------------------------]
+Js Class
